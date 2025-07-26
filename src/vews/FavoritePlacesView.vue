@@ -7,7 +7,7 @@ import IButton from '@/components/IButton/IButton.vue'
   <section class="flex h-screen">
     <div class="flex-1 px-6">
       <FavoritePlacesList />
-      <IButton class="w-full mt-10 bg-linear-65 from-[#FFA279] to-[#F3743D]">Додати маркер</IButton>
+      <IButton class="w-full mt-10" variant="gradient">Додати маркер</IButton>
     </div>
     <div class="flex-3">
       <img
