@@ -1,11 +1,13 @@
 <script setup>
-import FavoritePlacesView from './vews/FavoritePlacesView.vue'
+import RegisterForm from './components/RegisterForm/RegisterForm.vue'
+// import FavoritePlacesView from './vews/FavoritePlacesView.vue'
 // import HomePageView from './vews/HomePageView.vue'
 </script>
 
 <template>
-  <main class="h-screen">
+  <main class="h-screen bg-amber-500">
     <!-- <HomePageView /> -->
-    <FavoritePlacesView />
+    <!-- <FavoritePlacesView /> -->
+    <RegisterForm @submit="console.log" />
   </main>
 </template>
