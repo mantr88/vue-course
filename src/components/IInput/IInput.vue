@@ -1,12 +1,13 @@
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({
   modelValue: String,
   label: String,
-  name: String,
   placeholder: String,
   type: {
-    type: String,
     default: 'text',
+    type: String,
   },
 })
 
@@ -15,16 +16,34 @@ defineOptions({
 })
 
 const emit = defineEmits(['update:modelValue'])
+
+const baseStyles =
+  'w-full text-sm rounded-[4px] border-[#eaeaea] border-[1px] py-2 px-3 focus:outline-primary'
+
+const isTextarea = computed(() => {
+  return props.type === 'textarea'
+})
+
+const inputStyles = computed(() => {
+  return isTextarea.value ? baseStyles + ' resize-none' : baseStyles
+})
+
+const componentName = computed(() => {
+  return isTextarea.value ? 'textarea' : 'input'
+})
 </script>
+
 <template>
-  <div class="w-full text-grey">
+  <div class="w-full text-[#2C2C2C]">
     <label class="block">
       <span class="block text-xs px-3 mb-2">{{ props.label }}</span>
-      <input
+      <component
+        :is="componentName"
+        rows="3"
+        :class="inputStyles"
+        v-bind="{ ...$props, ...$attrs }"
         :value="modelValue"
         @input="emit('update:modelValue', $event.target.value)"
-        class="focus:border-primary border-[1px] border-grey rounded-[4px] py-2 px-3 text-sm w-full"
-        v-bind="{ ...$props, ...$attrs }"
       />
     </label>
   </div>
