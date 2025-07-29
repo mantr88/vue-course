@@ -1,5 +1,6 @@
 <script setup>
 import RegisterForm from './components/RegisterForm/RegisterForm.vue'
+import LoginForm from './components/LoginForm/LoginForm.vue'
 // import FavoritePlacesView from './vews/FavoritePlacesView.vue'
 // import HomePageView from './vews/HomePageView.vue'
 </script>
@@ -9,5 +10,6 @@ import RegisterForm from './components/RegisterForm/RegisterForm.vue'
     <!-- <HomePageView /> -->
     <!-- <FavoritePlacesView /> -->
     <RegisterForm @submit="console.log" />
+    <LoginForm @submit="console.log" />
   </main>
 </template>
