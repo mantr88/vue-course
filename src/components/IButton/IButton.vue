@@ -25,7 +25,7 @@ const buttonClass = computed(() => {
 
 <template>
   <button
-    class="rounded-xl px-10 py-[17px] font-bold -tracking-wider text-white"
+    class="rounded-xl px-10 py-[17px] font-bold -tracking-wider text-white cursor-pointer"
     :class="buttonClass"
   >
     <slot></slot>
