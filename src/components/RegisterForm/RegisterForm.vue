@@ -3,6 +3,13 @@ import { reactive, toRaw } from 'vue'
 import IButton from '../IButton/IButton.vue'
 import IInput from '../IInput/IInput.vue'
 
+const props = defineProps({
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+})
+
 const emit = defineEmits(['submit'])
 
 const userData = reactive({
@@ -37,6 +44,8 @@ const userData = reactive({
       placeholder="Enter your password"
       v-model="userData.password"
     />
-    <IButton class="w-full mt-6" variant="gradient" type="submit">Створити аккаунт</IButton>
+    <IButton class="w-full mt-6" variant="gradient" type="submit" :is-loading="props.isLoading"
+      >Створити аккаунт</IButton
+    >
   </form>
 </template>

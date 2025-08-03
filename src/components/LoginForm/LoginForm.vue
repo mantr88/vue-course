@@ -5,6 +5,13 @@ import IInput from '../IInput/IInput.vue'
 
 const emit = defineEmits(['submit'])
 
+const props = defineProps({
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+})
+
 const userData = reactive({
   email: '',
   password: '',
@@ -29,6 +36,8 @@ const userData = reactive({
       placeholder="Enter your password"
       v-model="userData.password"
     />
-    <IButton class="w-full mt-6" variant="gradient" type="submit">Увійти</IButton>
+    <IButton class="w-full mt-6" variant="gradient" type="submit" :is-loading="props.isLoading"
+      >Увійти</IButton
+    >
   </form>
 </template>
