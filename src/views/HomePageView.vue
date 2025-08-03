@@ -4,24 +4,10 @@ import IButton from '@/components/IButton/IButton.vue'
 import { MapboxMap, MapboxMarker } from '@studiometa/vue-mapbox-gl'
 import { mapSettings } from '@/map/settings'
 import MarkerIcon from '@/components/icons/MarkerIcon.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { getFavoritePlaces } from '@/api/favorite-places'
 
-const favoritePlacesMock = [
-  {
-    id: 1,
-    title: 'Place 1',
-    description: 'Description 1',
-    img: '',
-    lngLat: [30.523333, 50.410001],
-  },
-  {
-    id: 2,
-    title: 'Place 2',
-    description: 'Description 2',
-    img: '',
-    lngLat: [30.523333, 50.480001],
-  },
-]
+const favoritePlaces = ref([])
 
 const activeId = ref(null)
 const map = ref(null)
@@ -31,7 +17,7 @@ const changeActiveId = (id) => {
 }
 
 const changePlace = (id) => {
-  const place = favoritePlacesMock.find((place) => place.id === id)
+  const place = favoritePlaces.value.find((place) => place.id === id)
 
   if (place) {
     const lngLat = place.lngLat
@@ -46,13 +32,18 @@ const changePlace = (id) => {
     }
   }
 }
+
+onMounted(async () => {
+  const { data } = await getFavoritePlaces()
+  favoritePlaces.value = data
+})
 </script>
 
 <template>
   <section class="flex h-screen">
     <div class="flex-1 px-6 bg-white">
       <FavoritePlacesList
-        :items="favoritePlacesMock"
+        :items="favoritePlaces"
         :activeId="activeId"
         @place-clicked="changePlace"
       />
@@ -67,7 +58,7 @@ const changePlace = (id) => {
         :map-style="mapSettings.styles"
         @mb-created="(mapInstance) => (map = mapInstance)"
       >
-        <MapboxMarker v-for="place in favoritePlacesMock" :key="place.id" :lngLat="place.lngLat">
+        <MapboxMarker v-for="place in favoritePlaces" :key="place.id" :lngLat="place.lngLat">
           <button @click="changeActiveId(place.id)">
             <MarkerIcon class="size-10" />
           </button>
