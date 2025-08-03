@@ -14,7 +14,7 @@ const userData = reactive({
 <template>
   <form
     @submit.prevent="emit('submit', toRaw(userData))"
-    class="flex flex-col items-center justify-center w-[500px] p-10 rounded-2xl bg-white"
+    class="flex flex-col items-center justify-center max-w-[500px]"
   >
     <IInput
       name="name"
