@@ -11,6 +11,7 @@ const favoritePlaces = ref([])
 
 const activeId = ref(null)
 const map = ref(null)
+const mapMarkerLngLat = ref(null)
 
 const changeActiveId = (id) => {
   activeId.value = id
@@ -27,10 +28,14 @@ const changePlace = (id) => {
       map.value.flyTo({
         center: lngLat,
         zoom: 12,
-        essential: true, // this ensures the animation is not interrupted
+        essential: true, // this       ensures the animation is not interrupted
       })
     }
   }
+}
+
+const handleMapClick = ({lngLat}) => {
+  mapMarkerLngLat.value = [lngLat.lng, lngLat.lat]
 }
 
 onMounted(async () => {
@@ -57,8 +62,12 @@ onMounted(async () => {
         :access-token="mapSettings.apiToken"
         :map-style="mapSettings.styles"
         @mb-created="(mapInstance) => (map = mapInstance)"
+        @mb-click="handleMapClick"
       >
-        <MapboxMarker v-for="place in favoritePlaces" :key="place.id" :lngLat="place.lngLat">
+      <MapboxMarker v-if="mapMarkerLngLat" :lngLat="mapMarkerLngLat" anchor="bottom">
+            <MarkerIcon class="size-10" />
+        </MapboxMarker>
+        <MapboxMarker v-for="place in favoritePlaces" :key="place.id" :lngLat="place.lngLat" anchor="bottom">
           <button @click="changeActiveId(place.id)">
             <MarkerIcon class="size-10" />
           </button>
