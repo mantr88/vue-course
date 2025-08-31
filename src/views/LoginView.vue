@@ -1,7 +1,7 @@
 <script setup>
 import LoginForm from '@/components/LoginForm/LoginForm.vue'
 import { useRouter } from 'vue-router'
-import { useMutation } from '@/components/useMutation'
+import { useMutation } from '@/composables/useMutation'
 import { authService } from '@/api/authService'
 
 const router = useRouter()

@@ -2,7 +2,7 @@
 import RegisterForm from '@/components/RegisterForm/RegisterForm.vue'
 import { authService } from '@/api/authService'
 import { useRouter } from 'vue-router'
-import { useMutation } from '@/components/useMutation'
+import { useMutation } from '@/composables/useMutation'
 
 const router = useRouter()
 
